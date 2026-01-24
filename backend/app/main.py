@@ -1,12 +1,19 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
+from sqlalchemy.orm import Session
+from sqlalchemy import text  # Needed for raw SQL
+from app.db.session import get_db
 
-# The variable name MUST be 'app' because you ran 'app.main:app'
-app = FastAPI(title="ALT-V Economic Platform") 
+app = FastAPI(title="ALT-V Economic Platform")
 
 @app.get("/")
 def health_check():
     return {"status": "active", "system": "ALT-V"}
 
-@app.get("/items/{item_id}")
-async def read_item(item_id):
-    return {"item_id": item_id}
+@app.get("/test-db")
+def test_db_connection(db: Session = Depends(get_db)):
+    try:
+        # Try to run a simple SQL command
+        result = db.execute(text("SELECT 1"))
+        return {"status": "success", "message": "Database connected!"}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
