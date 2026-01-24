@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import DashboardLayout from './components/layout/DashboardLayout';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <DashboardLayout>
+      
+      {/* This is the "children" passed to the layout */}
+      <div className="space-y-6">
+        
+        {/* Page Title */}
+        <div className="flex items-end justify-between border-b border-[#262626] pb-4">
+          <div>
+            <h2 className="text-2xl font-bold text-white tracking-tight">Macro Overview</h2>
+            <p className="font-mono text-sm text-[#737373] mt-1">Real-time lagging vs. leading indicators</p>
+          </div>
+          <div className="font-mono text-xs text-[#525252]">
+            LAST UPDATE: <span className="text-[#e5e5e5]">10:42:05 UTC</span>
+          </div>
+        </div>
+
+        {/* Content Placeholder (Where we will put Metric Cards later) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="h-32 rounded border border-[#262626] bg-[#0a0a0a] p-4">
+            <span className="font-mono text-xs text-[#525252]">GDP (OFFICIAL)</span>
+          </div>
+          <div className="h-32 rounded border border-[#262626] bg-[#0a0a0a] p-4">
+             <span className="font-mono text-xs text-[#525252]">GDP (ALT-V PREDICTION)</span>
+          </div>
+          <div className="h-32 rounded border border-[#262626] bg-[#0a0a0a] p-4">
+             <span className="font-mono text-xs text-[#525252]">VOLATILITY INDEX</span>
+          </div>
+        </div>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+
+    </DashboardLayout>
+  );
 }
 
-export default App
+export default App;
