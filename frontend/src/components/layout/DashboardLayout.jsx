@@ -11,17 +11,15 @@ export default function DashboardLayout({ children }) {
       <div className="w-full border-b border-[#262626] bg-[#050505]/80 backdrop-blur-md z-50">
         
         {/* TOP NAVIGATION BAR (This keeps your content layout constrained) */}
-        <header className="flex-none h-16 px-6 flex items-center justify-between mx-auto max-w-[1900px] w-full">
+        <header className="flex-none h-16 px-6 flex items-center justify-between mx-auto max-w-[1850px] w-full">
           
           {/* LEFT: Logo & Brand */}
           <div className="flex items-center gap-8 ">
             {/* Logo */}
             <div className="flex items-center gap-3 pb-2">
-              <div className="h-6 w-6 bg-white/10 rounded-sm flex items-center justify-center">
-                 <div className="h-3 w-3 bg-white rotate-45"></div>
-              </div>
-              <h1 className="text-xl font-bold tracking-tighter uppercase font-sans text-white">
-                ALT-V <span className="font-mono ml-2 font-normal text-sm text-[#737373]">// Terminal</span>
+              
+              <h1 className="text-xl font-bold tracking-tighter font-sans text-white">
+                alt-v
               </h1>
             </div>
 

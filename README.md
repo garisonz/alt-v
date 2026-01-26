@@ -1,15 +1,22 @@
-# ALT-V - Economic Indicator Platform
+<div align="center">
 
-> **An alternative version to financial analytics. Aggregating leading indicators and alternative data to predict macro economic trends**
+# alt-v
 
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Database](https://img.shields.io/badge/PostgreSQL-TimeSeries-blue)
+_an alternative to financial and economic analytics._
 
-## Overview
+<p align="center">
+  <a href="https://docs.python.org/3/">
+    <img src="https://img.shields.io/badge/Python-3.10%2B-blue">
+  </a>
+  <a href="https://www.postgresql.org/docs/">
+    <img src="https://img.shields.io/badge/PostgreSQL-TimeSeries-blue" alt="Database">
+  </a>
+</p>
+</div>
 
-Financial executives and individual investors often rely on economic data (GDP, Unemployment) that is **lagging** (reports on the past) and **volatile** (subject to massive revisions).
+Individual investors rely heavily on the data and information that they consume. It is the basis of how they make financial decisions. 
 
-**alt-v** is a data engineering and visualization platform designed to reduce uncerrtainty in economic analysis. Instead of relying on noisy, revised, lagging, and incomplete economic data, this application ingests alternative data sources and leading indicators to provide a measureable value for current economic narratives.
+**alt-v** is a data engineering and data science project designed to reduce uncerrtainty in economic analysis. Instead of relying on noisy or lagging economic data, this application ingests alternative data sources and leading indicators to provide a measureable value for current economic narratives.
 
 ## Motivation
 
@@ -34,7 +41,7 @@ This application addresses three critical flaws in modern economic analysis:
 ### Phase 1: The Data Pipeline (Backend & Data Engineering)
 *Focus: Ingestion, Normalization, and Integrity*
 - [ ] **Integrate with Official APIs:** FRED API, BLS API, and SEC EDGAR API.
-- [ ] **Alternative Data Scraper:** Select target source and build ingestion script (Decision Pending).
+
 - [ ] **Database Schema:** Design schema for temporal versioning (storing the value, reference date, and publication date).
 
 ### Phase 2: Architecture & Database
