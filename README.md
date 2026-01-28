@@ -2,7 +2,7 @@
 
 # alt-v
 
-_an alternative to financial and economic analytics._
+_measuring company innovation_
 
 <p align="center">
   <a href="https://docs.python.org/3/">
@@ -12,58 +12,120 @@ _an alternative to financial and economic analytics._
     <img src="https://img.shields.io/badge/PostgreSQL-TimeSeries-blue" alt="Database">
   </a>
 </p>
+
 </div>
 
-Individual investors rely heavily on the data and information that they consume. It is the basis of how they make financial decisions. 
+---
 
-**alt-v** is a data engineering and data science project designed to reduce uncerrtainty in economic analysis. Instead of relying on noisy or lagging economic data, this application ingests alternative data sources and leading indicators to provide a measureable value for current economic narratives.
+## Overview
 
-## Motivation
+**alt-v** is a data platform for **measuring and comparing innovation across technology companies**.
 
-This application addresses three critical flaws in modern economic analysis:
+Innovation is hard to observe directly. alt-v approaches it as a **multi-signal problem**, combining inputs (R&D, talent), outputs (patents, products), and real-world execution signals (open-source activity, shipping velocity).
 
-1.  **The Revision Problem:** Initial BLS/government releases are estimates based on incomplete surveys. "Strong" months are often revised to "weak" months later.
-2.  **The Lag Problem:** Official metrics like GDP require two quarters of data to confirm a trend. By then, the market has already reacted.
-3.  **The Reality Gap:** Headline CPI and U-3 Unemployment often exclude real-world factors (e.g., discouraged workers or specific demographic living costs).
+The system ingests public and semi-public data, normalizes it into a **time-aware data model**, and exposes company-level innovation metrics through an API and dashboard.
 
-## Tech Stack & Architecture
+---
 
-* **Containerization:** Docker & Docker Compose
-* **Cloud Infrastructure:** AWS EC2 (Compute) & AWS RDS (Managed PostgreSQL)
-* **Backend:** Python (FastAPI)
-* **Data Processing:** Pandas, NumPy
-* **Database:** PostgreSQL
-* **Frontend:** React.js
-* **External APIs:** FRED (Federal Reserve Economic Data), BLS API, SEC EDGAR
+## Innovation Signals (Initial Scope)
+
+alt-v treats innovation as a composite of independent but complementary signals:
+
+- **R&D Investment**
+  - R&D expense and intensity (R&D / revenue)
+  - Source: SEC EDGAR filings
+
+- **Patents & IP**
+  - Patent counts, citations, and trends
+  - Source: USPTO / Google Patents (planned)
+
+- **Open-Source Activity**
+  - Repository activity, contributors, stars, velocity
+  - Source: GitHub API (planned)
+
+- **Talent Signals**
+  - Engineering and AI/ML hiring trends
+  - Source: job postings / public profiles (planned)
+
+Each signal is stored as a **time series**, enabling longitudinal analysis rather than static rankings.
+
+---
+
+## Architecture
+
+**Containerization**
+- Docker
+- Docker Compose
+
+**Backend**
+- Python
+- FastAPI
+
+**Database Connection**
+- psycopg2
+
+
+**Database**
+- PostgreSQL
+
+**Frontend**
+- Next.js
+- Tailwind CSS
+- shadcn/ui
+
+**External APIs**
+- SEC EDGAR API
+- Additional public data sources (planned)
+
+---
+
+## Data Model Philosophy
+
+alt-v is built around **temporal correctness**.
+
+For each metric, the system tracks:
+- `value` — the measured value
+- `reference_date` — the period the value represents
+- `publication_date` — when the data became publicly available
+- `source` — where the data came from
+
+This allows:
+- Point-in-time analysis
+- Backtesting innovation signals
+- Avoiding lookahead bias
+
+---
 
 ## Roadmap
 
 ### Phase 1: The Data Pipeline (Backend & Data Engineering)
-*Focus: Ingestion, Normalization, and Integrity*
-- [ ] **Integrate with Official APIs:** FRED API, BLS API, and SEC EDGAR API.
+**Focus: ingestion, normalization, and integrity**
 
-- [ ] **Database Schema:** Design schema for temporal versioning (storing the value, reference date, and publication date).
+- [ ] Integrate with SEC EDGAR API (R&D extraction from 10-Ks)
+- [ ] Design and implement temporal PostgreSQL schema
+- [ ] Company entity resolution (CIK ↔ ticker ↔ name)
+- [ ] Basic ETL framework with idempotent jobs
+- [ ] FastAPI endpoints for raw metrics
 
-### Phase 2: Architecture & Database
-*Focus: System Design and Performance*
-- [ ] **Database Selection:** Finalize choice (PostgreSQL vs TimescaleDB) and set up AWS RDS.
-- [ ] **API Development:** Build RESTful endpoints using FastAPI.
-- [ ] **Implement Caching:** Integrate Redis to optimize query performance.
+### Phase 2: Core Innovation Signals
+- [ ] Patent ingestion and aggregation
+- [ ] GitHub open-source metrics
+- [ ] Signal normalization and scaling
+- [ ] Composite innovation score (experimental)
 
-### Phase 3: Algorithm Implementation
-*Focus: Business Logic and Data Science*
-- [ ] **The Revision Problem:** Implement logic to track historical data volatility.
-- [ ] **The Lag Problem:** Build correlation engine for leading vs. lagging indicators.
-- [ ] **The Reality Gap:** Create filters for custom "baskets of goods" (inflation logic).
+### Phase 3: Dashboard & Analysis
+- [ ] Company profile pages
+- [ ] Time-series visualizations
+- [ ] Peer comparisons
+- [ ] Innovation momentum tracking
 
-### Phase 4: The Frontend
-*Focus: User Experience and Visualization*
-- [ ] **Interactive Dashboard:** Build main UI using React.
-- [ ] **Data Visualization:** Implement D3.js for complex time-series charts.
-- [ ] **Enhance User Experience:** Add alerts and responsive design.
+---
 
 ## Quick Start
 
-## Usage
+```bash
+git clone https://github.com/your-username/alt-v.git
+cd alt-v
 
-## Contributing
+docker-compose up --build
+
